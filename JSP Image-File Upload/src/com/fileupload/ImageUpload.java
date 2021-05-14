@@ -1,4 +1,5 @@
 package com.fileupload;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -26,15 +27,23 @@ public class ImageUpload extends HttpServlet {
 		try {
 			List<FileItem> images = upload.parseRequest(request);
 			
+			
 			for(FileItem img: images) {
 				String name= img.getName();
 				
 				name = name.substring(name.lastIndexOf("\\")+1);
 				
-			System.out.println("File Name: "+ name);
+				img.write(new File("C:\\Users\\Rivigo\\git\\JSP-Servlet-Image-File-Upload\\JSP Image-File Upload\\Images\\"+name));
+				//System.out.println("File Name: "+ name);
 			}
 			
+			
+			
+			
 		} catch (FileUploadException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
