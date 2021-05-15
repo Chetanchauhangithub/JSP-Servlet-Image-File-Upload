@@ -7,7 +7,7 @@
 <title>Image Upload</title>
 </head>
 <body>
-<form action="ImageUpload" method="post" enctype="multipart/form-data">
+<form action="ImageUpload?action=fileupload" method="post" enctype="multipart/form-data">
 
 Select images <input type="file" name="files" />
 

@@ -18,6 +18,8 @@ public class Files {
 	@Column(name="id")
 	int id;
 	
+	
+
 	@Column(name="file_name")
 	String fileName;
 	
@@ -61,6 +63,11 @@ public class Files {
 
 	public void setCaption(String caption) {
 		this.caption = caption;
+	}
+	
+	@Override
+	public String toString() {
+		return "Files [id=" + id + ", fileName=" + fileName + ", label=" + label + ", caption=" + caption + "]";
 	}
 
 }

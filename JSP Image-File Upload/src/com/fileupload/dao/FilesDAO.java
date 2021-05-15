@@ -1,5 +1,10 @@
 package com.fileupload.dao;
 
+
+
+
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -23,4 +28,17 @@ public class FilesDAO {
 		System.out.println(file.getFileName() + "  Got Added.");
 		
 	}
+	
+	public List<Files> listfile(){
+		
+		Session session = factory.getCurrentSession();
+		session.beginTransaction();
+		List<Files> files = session.createQuery("from file").getResultList();
+		
+		//session.getTransaction().commit();
+		return files;
+		
+		
+	}
+	
 }

@@ -27,21 +27,55 @@ public class ImageUpload extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
+		String action = request.getParameter("action");
+		
+		switch(action){
+		
+		case "fileupload": fileUpload(request,response);
+						   break;
+		case "listingimages"	: listingImage(request,response);	
+		                   break;
+		default : 
+				request.getRequestDispatcher("index.jsp").forward(request,response);
+		
+		}
+		
+		
+	}
+	
+	private void listingImage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
+		
+		
+		List<Files> files = new FilesDAO().listfile();
+		
+		request.setAttribute("files", files);
+		request.setAttribute("Path", path);
+		request.getRequestDispatcher("listFiles.jsp").forward(request, response);
+		
+	}
+
+	public void fileUpload(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
 		
 		try {
 			List<FileItem> images = upload.parseRequest(request);
 			
 			
-			for(FileItem img: images) {
+			for(FileItem img: images) 
+			{
 				String name= img.getName();
 				
 				name = name.substring(name.lastIndexOf("\\")+1);
-									
-				new FilesDAO().addFileDetails(new Files(name));
-				img.write(new File(path+name));
-				//System.out.println("File Name: "+ name);
-			}			
+				File file = new File(path+name);
+				if(!file.exists()) 
+				{
+					new FilesDAO().addFileDetails(new Files(name));
+					img.write(file);
+					//System.out.println("File Name: "+ name);
+				}	
+				listingImage(request, response);
+			}
 			
 		} catch (FileUploadException e) {
 			
