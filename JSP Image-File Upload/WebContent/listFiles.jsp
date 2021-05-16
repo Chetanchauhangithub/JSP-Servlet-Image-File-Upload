@@ -14,11 +14,11 @@
 		
 		<%
 		
-		
+		String path = (String)request.getAttribute("Path");
 		List<Files> files = (List<Files>) request.getAttribute("files");
 		for(Files file :files){
 			
-			out.println("<br>"+file);  
+			out.println("<br><image src="+path+file.getFileName()+">");  
 			
 		}
 		
