@@ -38,9 +38,22 @@ public class ImageUpload extends HttpServlet {
 		default : 
 				request.getRequestDispatcher("index.jsp").forward(request,response);
 		
+		}		
+	}
+	
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String action = request.getParameter("action");
+		
+		switch(action){
+		
+		
+		case "listingimages"	: listingImage(request,response);	
+		                   break;
+		default : 
+				request.getRequestDispatcher("index.jsp").forward(request,response);
+		
 		}
-		
-		
 	}
 	
 	private void listingImage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
