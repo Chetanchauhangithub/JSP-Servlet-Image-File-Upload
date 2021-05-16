@@ -22,7 +22,7 @@ import com.fileupload.dao.FilesDAO;
 public class ImageUpload extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public String path = "C:\\Users\\Rivigo\\git\\JSP-Servlet-Image-File-Upload\\JSP Image-File Upload\\Images\\";
+	public String path = "C:/image/";
 	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -87,7 +87,7 @@ ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
 					img.write(file);
 					//System.out.println("File Name: "+ name);
 				}	
-				listingImage(request, response);
+				
 			}
 			
 		} catch (FileUploadException e) {
@@ -97,6 +97,8 @@ ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
 			
 			e.printStackTrace();
 		}
+		
+		listingImage(request, response);
 		
 	}
 
